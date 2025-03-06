@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = document.getElementsByClassName("item");
+
+        // Loop untuk pasang event listener ke semua gambar
+        Array.from(items).forEach((item) => {
+          item.addEventListener("click", (event) => {
+            // Dapatkan posisi elemen yang diklik
+            const rect = item.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            // Jalankan confetti di posisi gambar
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: {
+                x: x / window.innerWidth,
+                y: y / window.innerHeight,
+              },
+            });
+            const clickSound = new Audio('/kimmy_slider_image/sounds/confetti.mp3');
+            clickSound.play();
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Ambil elemen-elemen penting
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("openModal");
+        const closeBtn = document.querySelector(".close");
+
+        // Buka modal saat tombol diklik
+        btn.onclick = function () {
+          const modalContent = modal.querySelector(".modal-content");
+          modalContent.style.animation = "slideUp 0.3s ease-out";
+          btn.style.animation = "fadeOut 0.3s ease-out";
+          
+          setTimeout(() => {
+            modal.style.display = "block";
+            btn.style.display = "none";
+          }, 300);
+        };
+
+        // Tutup modal saat tombol close diklik
+        closeBtn.onclick = function () {
+          const modalContent = modal.querySelector(".modal-content");
+          modalContent.style.animation = "slideDown 0.3s ease-out";
+          btn.style.animation = "fadeIn 0.3s ease-out";
+
+          // Tunggu animasi selesai baru sembunyikan modal
+          setTimeout(() => {
+            modal.style.display = "none";
+            btn.style.display = "block";
+          }, 300); // Sesuai durasi animasi
+        };
+
+        // Tutup modal kalau klik di luar area konten
+        window.onclick = function (event) {
+          if (event.target === modal) {
+            const modalContent = modal.querySelector(".modal-content");
+            modalContent.style.animation = "slideDown 0.3s ease-out";
+            btn.style.animation = "fadeIn 0.3s ease-out";
+
+            setTimeout(() => {
+              modal.style.display = "none";
+              btn.style.display = "block";
+            }, 300);
+          }
+        };
+      });
+    </script>
+    <title>Kimmy-Slider_Image</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #ffd1f8;
+        background-size: 300% 300%;
+        animation: animation 6s ease infinite;
+        background-image: repeating-linear-gradient(
+            to right,
+            transparent 0 100px,
+            #25283b22 100px 101px
+          ),
+          repeating-linear-gradient(
+            to bottom,
+            transparent 0 100px,
+            #25283b22 100px 101px
+          );
+      }
+      @keyframes animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      body::before {
+        position: absolute;
+        width: min(1400px, 90vw);
+        top: 10%;
+        left: 50%;
+        height: 90%;
+        transform: translateX(-50%);
+        content: "";
+        background-image: url(images/bg.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: top center;
+        pointer-events: none;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <audio autoplay loop>
+        <source src="/kimmy_slider_image/sounds/hbd.MP3" type="audio/mpeg">
+    </audio>
+    <div class="banner">
+      <div class="slider" style="--quantity: 9">
+        <div class="item" style="--position: 9">
+          <img src="images/kimmy_1.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 8">
+          <img src="images/kimmy_2.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 7">
+          <img src="images/kimmy_3.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 6">
+          <img src="images/kimmy_4.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 5">
+          <img src="images/kimmy_5.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 4">
+          <img src="images/kimmy_6.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 3">
+          <img src="images/kimmy_7.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 2">
+          <img src="images/kimmy_8.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 1">
+          <img src="images/kimmy_9.jpg" alt="" />
+        </div>
+      </div>
+      <div class="content">
+        <button id="openModal">🐹</button>
+        <h1 data-content="HBD">HBD</h1>
+        <div class="author">
+          <h2>Kimmy</h2>
+          <p><b>Si Baby Hamster Lincah</b></p>
+          <p>yang selalu berlari-lari dipikiranku</p>
+        </div>
+        <div class="model"></div>
+      </div>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Happy Birthday Kimmy!</h2>
+        <p>Si baby hamster lincah yang selalu berlari-lari dipikiranku 🥳</p>
+      </div>
+    </div>
+  </body>
+</html>
