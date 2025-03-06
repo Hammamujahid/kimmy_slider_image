@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script>
-        document.addEventListener("click", () => {
+document.addEventListener("click", () => {
   const audio = new Audio("sounds/hbd.mp3");
+  audio.loop = true; // Bikin lagu nge-loop terus
   audio.play().catch((error) => {
     console.log("Autoplay gagal:", error);
   });
@@ -153,9 +154,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <audio autoplay loop muted>
-      <source src="sounds/hbd.mp3" />
-    </audio>
     <div class="banner">
       <div class="slider" style="--quantity: 9">
         <div class="item" style="--position: 9">
