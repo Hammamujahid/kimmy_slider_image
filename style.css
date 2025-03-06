@@ -93,7 +93,8 @@
 }
 
 button,
-.modal {
+.modal,
+video {
   position: absolute;
   top: -999999px;
 }
